@@ -153,6 +153,20 @@ resource "aws_lambda_function" "this" {
     aws_iam_role_policy_attachment.vpc,
     aws_iam_role_policy_attachment.tracing,
   ]
+
+  dynamic "lifecycle" {
+    for_each = var.ignore_lambda_changes ? [1] : []
+    content {
+      ignore_changes = [
+        last_modified,
+        publish,
+        qualified_arn,
+        qualified_invoke_arn,
+        source_code_hash,
+        version
+      ]
+    }
+  }
 }
 
 resource "aws_lambda_layer_version" "this" {
