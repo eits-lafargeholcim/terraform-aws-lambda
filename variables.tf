@@ -767,3 +767,9 @@ variable "trigger_on_package_timestamp" {
   type        = bool
   default     = true
 }
+
+variable "ignore_lambda_changes" {
+  description = "Whether to ignore changes to the lambda function"
+  type        = bool
+  default     = false
+}
