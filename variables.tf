@@ -795,9 +795,3 @@ variable "logging_log_group" {
   type        = string
   default     = null
 }
-
-variable "ignore_lambda_changes" {
-  description = "Whether to ignore changes to the lambda function"
-  type        = bool
-  default     = false
-}
