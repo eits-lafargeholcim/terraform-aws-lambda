@@ -156,7 +156,6 @@ resource "aws_lambda_function" "this" {
 
   lifecycle {
     ignore_changes = [
-      last_modified,
       publish,
       qualified_arn,
       qualified_invoke_arn,
