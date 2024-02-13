@@ -157,7 +157,6 @@ resource "aws_lambda_function" "this" {
   lifecycle {
     ignore_changes = [
       publish,
-      qualified_invoke_arn,
       source_code_hash,
       version
     ]
