@@ -162,7 +162,8 @@ resource "aws_lambda_function" "this" {
 
   lifecycle {
     ignore_changes = [
-      source_code_hash
+      source_code_hash,
+      layers
     ]
   }
 }
