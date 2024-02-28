@@ -112,11 +112,17 @@ resource "aws_lambda_function" "this" {
     }
   }
 
-  logging_config {
-    log_group             = var.logging_log_group
-    log_format            = var.logging_log_format
-    application_log_level = var.logging_application_log_level
-    system_log_level      = var.logging_system_log_level
+  dynamic "logging_config" {
+    # Dont create logging config on gov cloud as it is not avaible.
+    # See https://github.com/hashicorp/terraform-provider-aws/issues/34810
+    for_each = data.aws_partition.current.partition == "aws" ? [true] : []
+
+    content {
+      log_group             = var.logging_log_group
+      log_format            = var.logging_log_format
+      application_log_level = var.logging_application_log_level
+      system_log_level      = var.logging_system_log_level
+    }
   }
 
   dynamic "timeouts" {
@@ -195,6 +201,16 @@ resource "aws_s3_object" "lambda_package" {
   kms_key_id             = var.s3_kms_key_id
 
   tags = var.s3_object_tags_only ? var.s3_object_tags : merge(var.tags, var.s3_object_tags)
+
+  dynamic "override_provider" {
+    for_each = var.s3_object_override_default_tags ? [true] : []
+
+    content {
+      default_tags {
+        tags = {}
+      }
+    }
+  }
 
   depends_on = [null_resource.archive]
 }
