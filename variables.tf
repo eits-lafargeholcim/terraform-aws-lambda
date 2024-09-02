@@ -254,6 +254,12 @@ variable "timeouts" {
   default     = {}
 }
 
+variable "skip_destroy" {
+  description = "Set to true if you do not wish the function to be deleted at destroy time, and instead just remove the function from the Terraform state. Useful for Lambda@Edge functions attached to CloudFront distributions."
+  type        = bool
+  default     = null
+}
+
 ###############
 # Function URL
 ###############
@@ -428,6 +434,18 @@ variable "cloudwatch_logs_retention_in_days" {
 
 variable "cloudwatch_logs_kms_key_id" {
   description = "The ARN of the KMS Key to use when encrypting log data."
+  type        = string
+  default     = null
+}
+
+variable "cloudwatch_logs_skip_destroy" {
+  description = "Whether to keep the log group (and any logs it may contain) at destroy time."
+  type        = bool
+  default     = false
+}
+
+variable "cloudwatch_logs_log_group_class" {
+  description = "Specified the log class of the log group. Possible values are: `STANDARD` or `INFREQUENT_ACCESS`"
   type        = string
   default     = null
 }
@@ -787,13 +805,13 @@ variable "logging_log_format" {
 variable "logging_application_log_level" {
   description = "The application log level of the Lambda Function. Valid values are \"TRACE\", \"DEBUG\", \"INFO\", \"WARN\", \"ERROR\", or \"FATAL\"."
   type        = string
-  default     = null
+  default     = "INFO"
 }
 
 variable "logging_system_log_level" {
   description = "The system log level of the Lambda Function. Valid values are \"DEBUG\", \"INFO\", or \"WARN\"."
   type        = string
-  default     = null
+  default     = "INFO"
 }
 
 variable "logging_log_group" {
