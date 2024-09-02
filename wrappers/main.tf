@@ -53,7 +53,6 @@ module "wrapper" {
   docker_image                                 = try(each.value.docker_image, var.defaults.docker_image, "")
   docker_pip_cache                             = try(each.value.docker_pip_cache, var.defaults.docker_pip_cache, null)
   docker_with_ssh_agent                        = try(each.value.docker_with_ssh_agent, var.defaults.docker_with_ssh_agent, false)
-  environment_variables                        = try(each.value.environment_variables, var.defaults.environment_variables, {})
   ephemeral_storage_size                       = try(each.value.ephemeral_storage_size, var.defaults.ephemeral_storage_size, 512)
   event_source_mapping                         = try(each.value.event_source_mapping, var.defaults.event_source_mapping, {})
   file_system_arn                              = try(each.value.file_system_arn, var.defaults.file_system_arn, null)
