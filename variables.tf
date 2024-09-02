@@ -152,12 +152,6 @@ variable "dead_letter_target_arn" {
   default     = null
 }
 
-variable "environment_variables" {
-  description = "A map that defines environment variables for the Lambda Function."
-  type        = map(string)
-  default     = {}
-}
-
 variable "tracing_mode" {
   description = "Tracing mode of the Lambda Function. Valid value can be either PassThrough or Active."
   type        = string

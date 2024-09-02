@@ -68,11 +68,8 @@ resource "aws_lambda_function" "this" {
     }
   }
 
-  dynamic "environment" {
-    for_each = length(keys(var.environment_variables)) == 0 ? [] : [true]
-    content {
-      variables = var.environment_variables
-    }
+  environment {
+    variables = {}
   }
 
   dynamic "dead_letter_config" {
@@ -168,7 +165,8 @@ resource "aws_lambda_function" "this" {
   lifecycle {
     ignore_changes = [
       source_code_hash,
-      layers
+      layers,
+      environment
     ]
   }
 }
