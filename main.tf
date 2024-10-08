@@ -285,13 +285,14 @@ resource "aws_lambda_permission" "current_version_triggers" {
   function_name = aws_lambda_function.this[0].function_name
   qualifier     = aws_lambda_function.this[0].version
 
-  statement_id_prefix = try(each.value.statement_id, each.key)
-  action              = try(each.value.action, "lambda:InvokeFunction")
-  principal           = try(each.value.principal, format("%s.amazonaws.com", try(each.value.service, "")))
-  principal_org_id    = try(each.value.principal_org_id, null)
-  source_arn          = try(each.value.source_arn, null)
-  source_account      = try(each.value.source_account, null)
-  event_source_token  = try(each.value.event_source_token, null)
+  statement_id_prefix    = try(each.value.statement_id, each.key)
+  action                 = try(each.value.action, "lambda:InvokeFunction")
+  principal              = try(each.value.principal, format("%s.amazonaws.com", try(each.value.service, "")))
+  principal_org_id       = try(each.value.principal_org_id, null)
+  source_arn             = try(each.value.source_arn, null)
+  source_account         = try(each.value.source_account, null)
+  event_source_token     = try(each.value.event_source_token, null)
+  function_url_auth_type = try(each.value.function_url_auth_type, null)
 
   lifecycle {
     create_before_destroy = true
@@ -304,13 +305,14 @@ resource "aws_lambda_permission" "unqualified_alias_triggers" {
 
   function_name = aws_lambda_function.this[0].function_name
 
-  statement_id_prefix = try(each.value.statement_id, each.key)
-  action              = try(each.value.action, "lambda:InvokeFunction")
-  principal           = try(each.value.principal, format("%s.amazonaws.com", try(each.value.service, "")))
-  principal_org_id    = try(each.value.principal_org_id, null)
-  source_arn          = try(each.value.source_arn, null)
-  source_account      = try(each.value.source_account, null)
-  event_source_token  = try(each.value.event_source_token, null)
+  statement_id_prefix    = try(each.value.statement_id, each.key)
+  action                 = try(each.value.action, "lambda:InvokeFunction")
+  principal              = try(each.value.principal, format("%s.amazonaws.com", try(each.value.service, "")))
+  principal_org_id       = try(each.value.principal_org_id, null)
+  source_arn             = try(each.value.source_arn, null)
+  source_account         = try(each.value.source_account, null)
+  event_source_token     = try(each.value.event_source_token, null)
+  function_url_auth_type = try(each.value.function_url_auth_type, null)
 
   lifecycle {
     create_before_destroy = true
@@ -336,6 +338,7 @@ resource "aws_lambda_event_source_mapping" "this" {
   topics                             = try(each.value.topics, null)
   queues                             = try(each.value.queues, null)
   function_response_types            = try(each.value.function_response_types, null)
+  tumbling_window_in_seconds         = try(each.value.tumbling_window_in_seconds, null)
 
   dynamic "destination_config" {
     for_each = try(each.value.destination_arn_on_failure, null) != null ? [true] : []
@@ -393,6 +396,16 @@ resource "aws_lambda_event_source_mapping" "this" {
           pattern = try(filter.value.pattern, null)
         }
       }
+    }
+  }
+
+  dynamic "document_db_event_source_config" {
+    for_each = try(each.value.document_db_event_source_config, [])
+
+    content {
+      database_name   = document_db_event_source_config.value.database_name
+      collection_name = try(document_db_event_source_config.value.collection_name, null)
+      full_document   = try(document_db_event_source_config.value.full_document, null)
     }
   }
 }

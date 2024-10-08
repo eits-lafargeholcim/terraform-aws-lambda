@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file.
 
+## [7.13.0](https://github.com/terraform-aws-modules/terraform-aws-lambda/compare/v7.12.0...v7.13.0) (2024-10-05)
+
+
+### Features
+
+* Support `aws_lambda_event_source_mapping.document_db_event_source_config` ([#626](https://github.com/terraform-aws-modules/terraform-aws-lambda/issues/626)) ([5d48199](https://github.com/terraform-aws-modules/terraform-aws-lambda/commit/5d481996ed6ef5ce784847b7e5bae1bae1ee8bfd))
+
+## [7.12.0](https://github.com/terraform-aws-modules/terraform-aws-lambda/compare/v7.11.0...v7.12.0) (2024-10-05)
+
+
+### Features
+
+* Add support for kafka event source config ([#617](https://github.com/terraform-aws-modules/terraform-aws-lambda/issues/617)) ([2c077cb](https://github.com/terraform-aws-modules/terraform-aws-lambda/commit/2c077cb1450af76cf44b56bfeba796ee9d9d9a00))
+
+## [7.11.0](https://github.com/terraform-aws-modules/terraform-aws-lambda/compare/v7.10.0...v7.11.0) (2024-10-01)
+
+
+### Features
+
+* Add function_url_auth_type option to aws_lambda_permission ([#625](https://github.com/terraform-aws-modules/terraform-aws-lambda/issues/625)) ([9f13397](https://github.com/terraform-aws-modules/terraform-aws-lambda/commit/9f13397f20467e660eba0ae5fcf98c66c75187ba))
+
+## [7.10.0](https://github.com/terraform-aws-modules/terraform-aws-lambda/compare/v7.9.0...v7.10.0) (2024-09-29)
+
+
+### Features
+
+* Add `tumbling_window_in_seconds` ([#623](https://github.com/terraform-aws-modules/terraform-aws-lambda/issues/623)) ([eedacff](https://github.com/terraform-aws-modules/terraform-aws-lambda/commit/eedacffef287cb02f776da4950e8345d9ec0200f))
+
+## [7.9.0](https://github.com/terraform-aws-modules/terraform-aws-lambda/compare/v7.8.1...v7.9.0) (2024-09-10)
+
+
+### Features
+
+* Added more examples for Rust, Go, Java runtimes ([#612](https://github.com/terraform-aws-modules/terraform-aws-lambda/issues/612)) ([a6fe411](https://github.com/terraform-aws-modules/terraform-aws-lambda/commit/a6fe4115ac96592ecbda27f72d42536da6518add))
+
 ## [7.8.1](https://github.com/terraform-aws-modules/terraform-aws-lambda/compare/v7.8.0...v7.8.1) (2024-08-23)
 
 
