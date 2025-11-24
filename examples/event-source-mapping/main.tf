@@ -37,6 +37,9 @@ module "lambda_function" {
       scaling_config = {
         maximum_concurrency = 20
       }
+      metrics_config = {
+        metrics = ["EventCount"]
+      }
     }
     dynamodb = {
       event_source_arn           = aws_dynamodb_table.this.stream_arn
@@ -83,6 +86,7 @@ module "lambda_function" {
           uri  = "/"
         }
       ]
+      tags = { mapping = "amq" }
     }
     #    self_managed_kafka = {
     #      batch_size        = 1
@@ -179,6 +183,10 @@ module "lambda_function" {
     "arn:aws:iam::aws:policy/service-role/AWSLambdaDynamoDBExecutionRole",
     "arn:aws:iam::aws:policy/service-role/AWSLambdaKinesisExecutionRole",
   ]
+
+  tags = {
+    example = "event-source-mapping"
+  }
 }
 
 ##################
