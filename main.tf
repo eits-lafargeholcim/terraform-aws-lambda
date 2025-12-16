@@ -175,7 +175,8 @@ resource "aws_lambda_function" "this" {
       environment,
       architectures, # Performing a change in the architectures via API implies updating the code. Since changes in the code are ignored, this results in replacing the code with the original one (i.e. it could be empty).
       timeout,
-      memory_size
+      memory_size,
+      reserved_concurrent_executions
     ]
   }
 }
